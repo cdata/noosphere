@@ -48,6 +48,52 @@
   * dependencies
     * noosphere-core bumped from 0.10.0 to 0.10.1
 
+## [0.8.0](https://github.com/cdata/noosphere/compare/noosphere-api-v0.7.7...noosphere-api-v0.8.0) (2023-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/issues/284))
+* Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/issues/253))
+* Several critical dependencies of this library were updated to new versions that contain breaking changes.
+* The `StorageProvider` trait has been replaced by the `Storage` trait. This new trait allows for distinct backing implementations of `BlockStore` and `KeyValueStore`.
+* The `.sphere` directory has a new layout; the files previously used to store metadata have been replaced with database metadata; the `blocks` directory is now called `storage`. At this time the easiest migration path is to initialize a new sphere and copy your existing files into it.
+* Many APIs that previously asked for bare strings when a DID string was expected now expect a newtype called `Did` that wraps a string.
+* The `noosphere-api` Client now holds an owned key instead of a reference.
+
+### Features
+
+* `SphereFs` is initialized with key material ([#140](https://github.com/cdata/noosphere/issues/140)) ([af48061](https://github.com/cdata/noosphere/commit/af4806114ca8f7703e0a888c7f369a4a4ed69c00))
+* Add `noosphere` crate-based Swift package ([#131](https://github.com/cdata/noosphere/issues/131)) ([e1204c2](https://github.com/cdata/noosphere/commit/e1204c2a5822c3c0dbb7e61bbacffb2c1f49d8d8))
+* Enable expired yet valid records in the name system. Update to ucan 0.2.0. ([#360](https://github.com/cdata/noosphere/issues/360)) ([3b0663a](https://github.com/cdata/noosphere/commit/3b0663abc7783a6d33dd47d20caae7597ab93ed0))
+* Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/issues/253)) ([f7ddfa7](https://github.com/cdata/noosphere/commit/f7ddfa7b65129efe795c6e3fca58cdc22799127a))
+* Re-implement `noosphere-cli` in terms of `noosphere` ([#162](https://github.com/cdata/noosphere/issues/162)) ([1e83bbb](https://github.com/cdata/noosphere/commit/1e83bbb689642b878f4f6909d7dd4a6df56b29f9))
+* Refactor storage interfaces ([#178](https://github.com/cdata/noosphere/issues/178)) ([4db55c4](https://github.com/cdata/noosphere/commit/4db55c4cba56b329a638a4227e7f3247ad8d319c))
+* Sphere writes do not block immutable reads ([#321](https://github.com/cdata/noosphere/issues/321)) ([14373c5](https://github.com/cdata/noosphere/commit/14373c5281c091bb41623677571566a2788a7e3f))
+* Syndicate sphere revisions to IPFS Kubo ([#177](https://github.com/cdata/noosphere/issues/177)) ([e269e04](https://github.com/cdata/noosphere/commit/e269e0484b73e0f5507406d57a2c06cf849bee3d))
+* Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/issues/284)) ([43bceaf](https://github.com/cdata/noosphere/commit/43bceafcc838c5b06565780f372bf7b401de288e))
+* Update Cargo.toml to test action ([b21a3ce](https://github.com/cdata/noosphere/commit/b21a3ce7dc7760f63be8ea5efe51d19f819bfe30))
+* Update IPLD-related dependencies ([#327](https://github.com/cdata/noosphere/issues/327)) ([5fdfadb](https://github.com/cdata/noosphere/commit/5fdfadb1656f9d6eef2dbbb8b00a598106bccf00))
+
+
+### Bug Fixes
+
+* **api:** Use rustls instead of OpenSSL ([1a0625a](https://github.com/cdata/noosphere/commit/1a0625ad79330d35ca137361297318bdbf29137e))
+
+
+### Miscellaneous Chores
+
+* Update IPLD-adjacent dependencies ([#180](https://github.com/cdata/noosphere/issues/180)) ([1a1114b](https://github.com/cdata/noosphere/commit/1a1114b0c6277ea2c0d879e43191e962eb2e462b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * noosphere-core bumped from 0.10.2 to 0.11.0
+    * noosphere-storage bumped from 0.6.2 to 0.7.0
+    * noosphere-car bumped from 0.1.1 to 0.2.0
+
 ## [0.7.7](https://github.com/subconsciousnetwork/noosphere/compare/noosphere-api-v0.7.6...noosphere-api-v0.7.7) (2023-05-05)
 
 
