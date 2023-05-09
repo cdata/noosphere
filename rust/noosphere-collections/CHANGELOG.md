@@ -16,6 +16,38 @@
   * dependencies
     * noosphere-storage bumped from 0.6.2 to 0.6.3
 
+## [0.6.0](https://github.com/cdata/noosphere/compare/noosphere-collections-v0.5.3...noosphere-collections-v0.6.0) (2023-05-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* Apply breaking domain concept in anticipation of beta ([#298](https://github.com/cdata/noosphere/issues/298))
+* Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/issues/284))
+* `SphereFile` fields referring to a `revision` now refer to a `version` instead.
+* Several critical dependencies of this library were updated to new versions that contain breaking changes.
+* The `StorageProvider` trait has been replaced by the `Storage` trait. This new trait allows for distinct backing implementations of `BlockStore` and `KeyValueStore`.
+
+### Features
+
+* Always flush on SphereFS save ([#231](https://github.com/cdata/noosphere/issues/231)) ([bd151d5](https://github.com/cdata/noosphere/commit/bd151d5aca75b78b786d008177ab7d4e53e843bc))
+* Beautify the Sphere Viewer demo app ([#186](https://github.com/cdata/noosphere/issues/186)) ([3e30fdb](https://github.com/cdata/noosphere/commit/3e30fdb5e2b6758397f05343491a36512a4f4a0c))
+* Refactor storage interfaces ([#178](https://github.com/cdata/noosphere/issues/178)) ([4db55c4](https://github.com/cdata/noosphere/commit/4db55c4cba56b329a638a4227e7f3247ad8d319c))
+* Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/issues/284)) ([43bceaf](https://github.com/cdata/noosphere/commit/43bceafcc838c5b06565780f372bf7b401de288e))
+* Update IPLD-related dependencies ([#327](https://github.com/cdata/noosphere/issues/327)) ([5fdfadb](https://github.com/cdata/noosphere/commit/5fdfadb1656f9d6eef2dbbb8b00a598106bccf00))
+
+
+### Miscellaneous Chores
+
+* Apply breaking domain concept in anticipation of beta ([#298](https://github.com/cdata/noosphere/issues/298)) ([bd34ab4](https://github.com/cdata/noosphere/commit/bd34ab49b2d2c65cffe25657cf4d188d5c79d15f))
+* Update IPLD-adjacent dependencies ([#180](https://github.com/cdata/noosphere/issues/180)) ([1a1114b](https://github.com/cdata/noosphere/commit/1a1114b0c6277ea2c0d879e43191e962eb2e462b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * noosphere-storage bumped from 0.6.3 to 0.7.0
+
 ## [0.5.2](https://github.com/subconsciousnetwork/noosphere/compare/noosphere-collections-v0.5.1...noosphere-collections-v0.5.2) (2023-04-22)
 
 
