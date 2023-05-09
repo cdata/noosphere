@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate tracing;
 // hi!
+// hi2
 pub mod error;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod ffi;
