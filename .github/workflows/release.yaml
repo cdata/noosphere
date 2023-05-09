@@ -17,7 +17,7 @@ jobs:
   release-please:
     name: 'Prepare a release'
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.repository_owner == 'subconsciousnetwork'
+    if: github.ref == 'refs/heads/main' && github.repository_owner == 'cdata'
     outputs:
       noosphere_cli_released: ${{ steps.release.outputs['rust/noosphere-cli--release_created'] }}
       noosphere_cli_release_tag_name: ${{ steps.release.outputs['rust/noosphere-cli--tag_name'] }}
@@ -76,15 +76,6 @@ jobs:
         with:
           files: orb-*/orb-*
           tag_name: ${{ needs['release-please'].outputs.noosphere_cli_release_tag_name }}
-
-  build-container-images:
-    name: 'Build container images for release'
-    needs: ['release-please']
-    if: ${{ needs['release-please'].outputs.noosphere_released }}
-    uses: ./.github/workflows/container_images.yaml
-    secrets: inherit
-    with:
-      image-tag: ${{ needs['release-please'].outputs.noosphere_release_tag_name }}
 
   noosphere-apple-build:
     name: 'Build Noosphere artifacts (Apple)'
@@ -179,28 +170,3 @@ jobs:
           gh api --method PUT /repos/:owner/:repo/git/refs \
             --field ref="refs/tags/swift-$NOOSPHERE_VERSION" \
             --field sha="$COMMIT_SHA_TO_TAG"
-
-  # Publishes crates to crates.io in dependency order. This command is
-  # idempotent and won't re-publish crates that are already published, so it's
-  # safe for us to run it indiscriminately
-  publish-crates:
-    name: 'Publish to crates.io'
-    needs: ['release-please']
-    runs-on: ubuntu-latest
-    if: ${{ needs['release-please'].outputs.anything_was_released }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: Swatinem/rust-cache@v2
-      - name: 'Setup Rust'
-        run: |
-          curl -sSf https://sh.rustup.rs | sh -s -- -y
-      - name: 'Install environment packages'
-        run: |
-          sudo apt-get update -qqy
-          sudo apt-get install protobuf-compiler cmake libssl-dev pkg-config
-      - name: 'Install cargo-workspaces'
-        run: cargo install --force cargo-workspaces
-      - name: 'Publish crates'
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
-        run: cargo workspaces publish --from-git
