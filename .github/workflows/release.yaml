@@ -157,12 +157,12 @@ jobs:
           # Update Package.swift via the Github API (we do it this way to get 'easy' commit signing)
           # https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#create-or-update-file-contents
 
-          export COMMIT_SHA_TO_TAG=gh api --method PUT /repos/:owner/:repo/contents/Package.swift \
+          export COMMIT_SHA_TO_TAG="$(gh api --method PUT /repos/:owner/:repo/contents/Package.swift \
             --field message="$MESSAGE" \
             --field content="$CONTENT" \
             --field encoding="base64" \
             --field branch="main" \
-            --field sha="$SHA" | jq .commit.sha | xargs echo
+            --field sha="$SHA" | jq .commit.sha | xargs echo)"
 
           # Also add a tag for the SwiftNoosphere release that correlates with the latest Noosphere release
           # https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#create-a-reference
