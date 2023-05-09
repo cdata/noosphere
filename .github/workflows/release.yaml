@@ -67,7 +67,7 @@ jobs:
       # NOTE: The release has to be published before adding build artifacts,
       # otherwise the upload causes a different release to be made (???)
       - name: 'Publish release'
-        run: gh release edit ${{ needs['release-please'].outputs.noosphere_cli_release_tag_name }} --draft=false --repo=subconsciousnetwork/noosphere
+        run: gh release edit ${{ needs['release-please'].outputs.noosphere_cli_release_tag_name }} --draft=false --repo=cdata/noosphere
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -99,7 +99,7 @@ jobs:
       # NOTE: The release has to be published before adding build artifacts,
       # otherwise the upload causes a different release to be made (???)
       - name: 'Publish release'
-        run: gh release edit ${{ needs['release-please'].outputs.noosphere_release_tag_name }} --draft=false --repo=subconsciousnetwork/noosphere
+        run: gh release edit ${{ needs['release-please'].outputs.noosphere_release_tag_name }} --draft=false --repo=cdata/noosphere
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -129,7 +129,7 @@ jobs:
           echo "checksum=$CHECKSUM" >> $GITHUB_OUTPUT
       - name: 'Modify Package.swift'
         run: |
-          URL="https://github.com/subconsciousnetwork/noosphere/releases/download/${{ needs.release-please.outputs.noosphere_release_tag_name }}/libnoosphere-apple-xcframework.zip"
+          URL="https://github.com/cdata/noosphere/releases/download/${{ needs.release-please.outputs.noosphere_release_tag_name }}/libnoosphere-apple-xcframework.zip"
 
           sed -i -e "s#url: \"[^\"]*\",#url: \"$URL\",#" ./Package.swift
           sed -i -e "s#checksum: \"[^\"]*\"),#checksum: \"${{ steps.generate-checksum.outputs.checksum }}\"),#" ./Package.swift
