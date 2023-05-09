@@ -72,6 +72,54 @@
   * dev-dependencies
     * noosphere-sphere bumped from 0.5.5 to 0.5.6
 
+## [0.9.0](https://github.com/cdata/noosphere/compare/noosphere-into-v0.8.7...noosphere-into-v0.9.0) (2023-05-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* Revised tracing configuration ([#342](https://github.com/cdata/noosphere/issues/342))
+* Apply breaking domain concept in anticipation of beta ([#298](https://github.com/cdata/noosphere/issues/298))
+* Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/issues/284))
+* Revise links and gateway ([#278](https://github.com/cdata/noosphere/issues/278))
+* Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/issues/253))
+* `SphereFile` fields referring to a `revision` now refer to a `version` instead.
+* Several critical dependencies of this library were updated to new versions that contain breaking changes.
+* The `StorageProvider` trait has been replaced by the `Storage` trait. This new trait allows for distinct backing implementations of `BlockStore` and `KeyValueStore`.
+* `SphereIpld` identity is now a `Did`
+* Many APIs that previously asked for bare strings when a DID string was expected now expect a newtype called `Did` that wraps a string.
+
+### Features
+
+* `SphereFs` is initialized with key material ([#140](https://github.com/cdata/noosphere/issues/140)) ([af48061](https://github.com/cdata/noosphere/commit/af4806114ca8f7703e0a888c7f369a4a4ed69c00))
+* Beautify the Sphere Viewer demo app ([#186](https://github.com/cdata/noosphere/issues/186)) ([3e30fdb](https://github.com/cdata/noosphere/commit/3e30fdb5e2b6758397f05343491a36512a4f4a0c))
+* Dot syntax when traversing by petname ([#306](https://github.com/cdata/noosphere/issues/306)) ([cd87b05](https://github.com/cdata/noosphere/commit/cd87b0533c21bbbd4d82332556e70ecc706a5531))
+* Introduce pet names to spheres ([#154](https://github.com/cdata/noosphere/issues/154)) ([7495796](https://github.com/cdata/noosphere/commit/74957968af7f7e51a6aa731192431fbf5e01215e))
+* Noosphere builds and runs tests on Windows ([#228](https://github.com/cdata/noosphere/issues/228)) ([d1320f0](https://github.com/cdata/noosphere/commit/d1320f08429c8f8090fd4612b56ebf9386414cc7))
+* Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/issues/253)) ([f7ddfa7](https://github.com/cdata/noosphere/commit/f7ddfa7b65129efe795c6e3fca58cdc22799127a))
+* Refactor storage interfaces ([#178](https://github.com/cdata/noosphere/issues/178)) ([4db55c4](https://github.com/cdata/noosphere/commit/4db55c4cba56b329a638a4227e7f3247ad8d319c))
+* Revise links and gateway ([#278](https://github.com/cdata/noosphere/issues/278)) ([4cd2e3a](https://github.com/cdata/noosphere/commit/4cd2e3af8b10cdaae710d87e4b919b5180d10fec))
+* Revised tracing configuration ([#342](https://github.com/cdata/noosphere/issues/342)) ([c4a4084](https://github.com/cdata/noosphere/commit/c4a4084771680c8e49b3db498a5da422db2adda8))
+* Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/issues/284)) ([43bceaf](https://github.com/cdata/noosphere/commit/43bceafcc838c5b06565780f372bf7b401de288e))
+* Update IPLD-related dependencies ([#327](https://github.com/cdata/noosphere/issues/327)) ([5fdfadb](https://github.com/cdata/noosphere/commit/5fdfadb1656f9d6eef2dbbb8b00a598106bccf00))
+* Use `anyhow` workspace dep in `noosphere-into` ([f8ace5a](https://github.com/cdata/noosphere/commit/f8ace5a1a438cfa4387e8be884c2b9e89d26eb6d))
+
+
+### Miscellaneous Chores
+
+* Apply breaking domain concept in anticipation of beta ([#298](https://github.com/cdata/noosphere/issues/298)) ([bd34ab4](https://github.com/cdata/noosphere/commit/bd34ab49b2d2c65cffe25657cf4d188d5c79d15f))
+* Update IPLD-adjacent dependencies ([#180](https://github.com/cdata/noosphere/issues/180)) ([1a1114b](https://github.com/cdata/noosphere/commit/1a1114b0c6277ea2c0d879e43191e962eb2e462b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * noosphere-core bumped from 0.11.0 to 0.12.0
+    * noosphere-storage bumped from 0.6.3 to 0.7.0
+    * noosphere-sphere bumped from 0.5.6 to 0.6.0
+  * dev-dependencies
+    * noosphere-sphere bumped from 0.5.6 to 0.6.0
+
 ## [0.8.6](https://github.com/subconsciousnetwork/noosphere/compare/noosphere-into-v0.8.5...noosphere-into-v0.8.6) (2023-05-09)
 
 

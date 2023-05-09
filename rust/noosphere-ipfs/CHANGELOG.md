@@ -24,6 +24,55 @@
   * dependencies
     * noosphere-car bumped from 0.1.1 to 0.1.2
 
+## [0.5.0](https://github.com/cdata/noosphere/compare/noosphere-ipfs-v0.4.4...noosphere-ipfs-v0.5.0) (2023-05-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* Revised tracing configuration ([#342](https://github.com/cdata/noosphere/issues/342))
+* Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/issues/284))
+* Fork `iroh-car` as `noosphere-car` ([#283](https://github.com/cdata/noosphere/issues/283))
+* Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/issues/253))
+* Reconfigure module dependencies so that noosphere-ipfs depends on noosphere-storage, and not the other way around creating a cycle. ([#254](https://github.com/cdata/noosphere/issues/254))
+* Templatize the two IPFS HTTP APIs as noosphere_ipfs::IpfsClient, and reconfigure KuboStorage as IpfsStorage, operating on IpfsClient rather than a URL. ([#252](https://github.com/cdata/noosphere/issues/252))
+
+### Features
+
+* Add instrumentation to `noosphere-ns` and `noosphere-ipfs`. ([#304](https://github.com/cdata/noosphere/issues/304)) ([3d6062d](https://github.com/cdata/noosphere/commit/3d6062d501e21393532b2db6f9ac740a041d91ba))
+* Dot syntax when traversing by petname ([#306](https://github.com/cdata/noosphere/issues/306)) ([cd87b05](https://github.com/cdata/noosphere/commit/cd87b0533c21bbbd4d82332556e70ecc706a5531))
+* Fork `iroh-car` as `noosphere-car` ([#283](https://github.com/cdata/noosphere/issues/283)) ([b0b7c38](https://github.com/cdata/noosphere/commit/b0b7c3835ff1ef271bbe0f833f6f7856fcc30de1))
+* Implement `IpfsClient::get_block` for Kubo for orb/orb-ns integration with IPFS. ([#251](https://github.com/cdata/noosphere/issues/251)) ([f18db24](https://github.com/cdata/noosphere/commit/f18db2425d620165090afee9418d5f743a0cf579))
+* Introduce `noosphere-gateway` crate ([#238](https://github.com/cdata/noosphere/issues/238)) ([791bc39](https://github.com/cdata/noosphere/commit/791bc3996cfac12cb077c3721f22d080a71d33ba))
+* Introduce `noosphere-ipfs` crate ([#203](https://github.com/cdata/noosphere/issues/203)) ([ad1945b](https://github.com/cdata/noosphere/commit/ad1945bb7d64f169b6dac96807bf8d8e0c3ab482))
+* Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/issues/253)) ([f7ddfa7](https://github.com/cdata/noosphere/commit/f7ddfa7b65129efe795c6e3fca58cdc22799127a))
+* Revised tracing configuration ([#342](https://github.com/cdata/noosphere/issues/342)) ([c4a4084](https://github.com/cdata/noosphere/commit/c4a4084771680c8e49b3db498a5da422db2adda8))
+* Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/issues/284)) ([43bceaf](https://github.com/cdata/noosphere/commit/43bceafcc838c5b06565780f372bf7b401de288e))
+* Update IPLD-related dependencies ([#327](https://github.com/cdata/noosphere/issues/327)) ([5fdfadb](https://github.com/cdata/noosphere/commit/5fdfadb1656f9d6eef2dbbb8b00a598106bccf00))
+
+
+### Bug Fixes
+
+* Enable `noosphere-ipfs` to compile on its own ([764eeb7](https://github.com/cdata/noosphere/commit/764eeb7d24df2773afd5bce934f2de6fc2de2640))
+* Introduce `TryOrReset` to help worker threads ([#300](https://github.com/cdata/noosphere/issues/300)) ([5ea4b2c](https://github.com/cdata/noosphere/commit/5ea4b2c91d0b829e22f0c0b3cd22fe837eddf905))
+* Reconfigure module dependencies so that noosphere-ipfs depends on noosphere-storage, and not the other way around creating a cycle. ([#254](https://github.com/cdata/noosphere/issues/254)) ([b79872a](https://github.com/cdata/noosphere/commit/b79872afd54c7b69d447dfe99e750bb6a813645c))
+* Several fixes for noosphere-ipfs as it gets further integrated ([#302](https://github.com/cdata/noosphere/issues/302)) ([9da4dd0](https://github.com/cdata/noosphere/commit/9da4dd063edf5bbf1a86556db64428d2ecb43f79))
+
+
+### Miscellaneous Chores
+
+* Templatize the two IPFS HTTP APIs as noosphere_ipfs::IpfsClient, and reconfigure KuboStorage as IpfsStorage, operating on IpfsClient rather than a URL. ([#252](https://github.com/cdata/noosphere/issues/252)) ([518beae](https://github.com/cdata/noosphere/commit/518beae563bd04c921ee3c6641a7249f14c611e4))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * noosphere-storage bumped from 0.6.3 to 0.7.0
+    * noosphere-car bumped from 0.1.2 to 0.2.0
+  * dev-dependencies
+    * noosphere-storage bumped from 0.6.3 to 0.7.0
+    * noosphere-core bumped from 0.11.0 to 0.12.0
+
 ## [0.4.3](https://github.com/subconsciousnetwork/noosphere/compare/noosphere-ipfs-v0.4.2...noosphere-ipfs-v0.4.3) (2023-05-08)
 
 
