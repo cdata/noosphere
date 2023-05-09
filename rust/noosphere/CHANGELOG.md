@@ -37,6 +37,13 @@
     * noosphere-sphere bumped from 0.5.5 to 0.5.6
     * noosphere-into bumped from 0.8.6 to 0.8.7
 
+## [0.12.1](https://github.com/cdata/noosphere/compare/noosphere-v0.12.0...noosphere-v0.12.1) (2023-05-09)
+
+
+### Features
+
+* Moar feat docs ([1cf746e](https://github.com/cdata/noosphere/commit/1cf746eeec5af116be61c8da1b5e44943d30e753))
+
 ## [0.12.0](https://github.com/cdata/noosphere/compare/noosphere-v0.11.0...noosphere-v0.12.0) (2023-05-09)
 
 
