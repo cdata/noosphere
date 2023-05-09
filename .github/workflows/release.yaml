@@ -152,24 +152,24 @@ jobs:
   # Publishes crates to crates.io in dependency order. This command is
   # idempotent and won't re-publish crates that are already published, so it's
   # safe for us to run it indiscriminately
-  publish-crates:
-    name: 'Publish to crates.io'
-    needs: ['release-please']
-    runs-on: ubuntu-latest
-    if: ${{ needs['release-please'].outputs.anything_was_released }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: Swatinem/rust-cache@v2
-      - name: 'Setup Rust'
-        run: |
-          curl -sSf https://sh.rustup.rs | sh -s -- -y
-      - name: 'Install environment packages'
-        run: |
-          sudo apt-get update -qqy
-          sudo apt-get install protobuf-compiler cmake libssl-dev pkg-config
-      - name: 'Install cargo-workspaces'
-        run: cargo install --force cargo-workspaces
-      - name: 'Publish crates'
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
-        run: cargo workspaces publish --from-git
+#   publish-crates:
+#     name: 'Publish to crates.io'
+#     needs: ['release-please']
+#     runs-on: ubuntu-latest
+#     if: ${{ needs['release-please'].outputs.anything_was_released }}
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: Swatinem/rust-cache@v2
+#       - name: 'Setup Rust'
+#         run: |
+#           curl -sSf https://sh.rustup.rs | sh -s -- -y
+#       - name: 'Install environment packages'
+#         run: |
+#           sudo apt-get update -qqy
+#           sudo apt-get install protobuf-compiler cmake libssl-dev pkg-config
+#       - name: 'Install cargo-workspaces'
+#         run: cargo install --force cargo-workspaces
+#       - name: 'Publish crates'
+#         env:
+#           CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
+#         run: cargo workspaces publish --from-git
