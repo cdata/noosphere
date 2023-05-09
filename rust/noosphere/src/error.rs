@@ -1,7 +1,7 @@
 use noosphere_api::data::PushError;
 use thiserror::Error;
 
-# An important comment
+// An important comment
 
 #[derive(Error, Debug)]
 pub enum NoosphereError {
