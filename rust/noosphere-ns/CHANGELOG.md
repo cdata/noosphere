@@ -44,6 +44,67 @@
     * noosphere bumped from 0.10.0 to 0.10.1
     * noosphere-ipfs bumped from 0.4.0 to 0.4.1
 
+## [0.7.0](https://github.com/cdata/noosphere/compare/noosphere-ns-v0.6.2...noosphere-ns-v0.7.0) (2023-05-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* Revised tracing configuration ([#342](https://github.com/cdata/noosphere/issues/342))
+* Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/issues/253))
+* Templatize the two IPFS HTTP APIs as noosphere_ipfs::IpfsClient, and reconfigure KuboStorage as IpfsStorage, operating on IpfsClient rather than a URL. ([#252](https://github.com/cdata/noosphere/issues/252))
+* upgrade libp2p to 0.50.0 ([#209](https://github.com/cdata/noosphere/issues/209))
+* Several critical dependencies of this library were updated to new versions that contain breaking changes.
+* The `StorageProvider` trait has been replaced by the `Storage` trait. This new trait allows for distinct backing implementations of `BlockStore` and `KeyValueStore`.
+* The `.sphere` directory has a new layout; the files previously used to store metadata have been replaced with database metadata; the `blocks` directory is now called `storage`. At this time the easiest migration path is to initialize a new sphere and copy your existing files into it.
+* initial work on NameSystem, wrapping the underlying DHT network. ([#122](https://github.com/cdata/noosphere/issues/122))
+
+### Features
+
+* Add instrumentation to `noosphere-ns` and `noosphere-ipfs`. ([#304](https://github.com/cdata/noosphere/issues/304)) ([3d6062d](https://github.com/cdata/noosphere/commit/3d6062d501e21393532b2db6f9ac740a041d91ba))
+* cache 'peer_id' in orb-ns to provide a HTTP route that does not lock the NS mutex for testing. ([#303](https://github.com/cdata/noosphere/issues/303)) ([8e4769f](https://github.com/cdata/noosphere/commit/8e4769f548b486147a9b1e72d86555fe4246fa14))
+* DHT configuration and status API ([#207](https://github.com/cdata/noosphere/issues/207)) ([7e671cf](https://github.com/cdata/noosphere/commit/7e671cfe06768e7faadd9d2573a11c899ae9cb22))
+* Enable expired yet valid records in the name system. Update to ucan 0.2.0. ([#360](https://github.com/cdata/noosphere/issues/360)) ([3b0663a](https://github.com/cdata/noosphere/commit/3b0663abc7783a6d33dd47d20caae7597ab93ed0))
+* Enable support of quorum=0 for DHT during infra bootstrapping ([#335](https://github.com/cdata/noosphere/issues/335)) ([9d3619e](https://github.com/cdata/noosphere/commit/9d3619e0630a9fe3de867e08770df9d30682a91f))
+* Expose ipfs-api-url to orb-ns to integrate IPFS cid resolution in NS validation. ([#265](https://github.com/cdata/noosphere/issues/265)) ([d1bdc29](https://github.com/cdata/noosphere/commit/d1bdc29d28dc28e99eca794c11b4d190b7128dfe))
+* Expose replication/publication/ttl intervals to NameSystemBuilder ([#130](https://github.com/cdata/noosphere/issues/130)) ([e20680e](https://github.com/cdata/noosphere/commit/e20680e225d53d8c658a9c6c2ba5dcb80d2a314e))
+* Follow up of initial orb-ns implementation. ([#222](https://github.com/cdata/noosphere/issues/222)) ([bb4c53f](https://github.com/cdata/noosphere/commit/bb4c53f3e79de6f5f66cc5b83ec815864f6bc5ab))
+* Implement a RecordValidator trait for the NameSystem DHT ([#129](https://github.com/cdata/noosphere/issues/129)) ([ba5560c](https://github.com/cdata/noosphere/commit/ba5560c031f2251a984eeaa0e0a7c95ad63e3c70))
+* Improvements to the NameSystem based on initial gateway integration ([#196](https://github.com/cdata/noosphere/issues/196)) ([4a6898e](https://github.com/cdata/noosphere/commit/4a6898e0aa8e1d96780226d384a6876eac122658))
+* initial work on NameSystem, wrapping the underlying DHT network. ([#122](https://github.com/cdata/noosphere/issues/122)) ([656fb23](https://github.com/cdata/noosphere/commit/656fb23a5ce5a75b7f1de59444c1d866a9308d83))
+* Integration of orb-ns CLI into the Name System's operator API ([#218](https://github.com/cdata/noosphere/issues/218)) ([7f83fad](https://github.com/cdata/noosphere/commit/7f83fad1f318ec45eb47de76ca855f9eab4fe688))
+* Introduce a `bootstrap` CLI in `noosphere-ns` to spin up DHT ([#143](https://github.com/cdata/noosphere/issues/143)) ([c5f2710](https://github.com/cdata/noosphere/commit/c5f27103cf6b8f597da0a3707fed45a494023920))
+* Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/issues/253)) ([f7ddfa7](https://github.com/cdata/noosphere/commit/f7ddfa7b65129efe795c6e3fca58cdc22799127a))
+* Re-implement `noosphere-cli` in terms of `noosphere` ([#162](https://github.com/cdata/noosphere/issues/162)) ([1e83bbb](https://github.com/cdata/noosphere/commit/1e83bbb689642b878f4f6909d7dd4a6df56b29f9))
+* Refactor storage interfaces ([#178](https://github.com/cdata/noosphere/issues/178)) ([4db55c4](https://github.com/cdata/noosphere/commit/4db55c4cba56b329a638a4227e7f3247ad8d319c))
+* Remove `Mutex` from NNS `ApiServer` for concurrency ([#357](https://github.com/cdata/noosphere/issues/357)) ([2347d10](https://github.com/cdata/noosphere/commit/2347d10490fbb7ecc219a3a09c1de21e11f66fa2))
+* Revised tracing configuration ([#342](https://github.com/cdata/noosphere/issues/342)) ([c4a4084](https://github.com/cdata/noosphere/commit/c4a4084771680c8e49b3db498a5da422db2adda8))
+* Update IPLD-related dependencies ([#327](https://github.com/cdata/noosphere/issues/327)) ([5fdfadb](https://github.com/cdata/noosphere/commit/5fdfadb1656f9d6eef2dbbb8b00a598106bccf00))
+* upgrade libp2p to 0.50.0 ([#209](https://github.com/cdata/noosphere/issues/209)) ([14ab195](https://github.com/cdata/noosphere/commit/14ab195b797bcb23d1ed25a8eacc3fc37e30c0ce))
+* Wrap validation storage with BlockRetryStore in orb-ns. ([#333](https://github.com/cdata/noosphere/issues/333)) ([8e7f287](https://github.com/cdata/noosphere/commit/8e7f287fe5cb6fe8842b9236ead57cccbdb8c90b))
+
+
+### Bug Fixes
+
+* Increase timeout in DHT network tests to satisfy CI, fixes [#311](https://github.com/cdata/noosphere/issues/311) ([#312](https://github.com/cdata/noosphere/issues/312)) ([2f9f1a6](https://github.com/cdata/noosphere/commit/2f9f1a6bbcc394672dfd2b93e4b1255f0fa9529b))
+* Intermittent timeouts in DhtNode tests introduced in [#308](https://github.com/cdata/noosphere/issues/308) ([#316](https://github.com/cdata/noosphere/issues/316)) ([704652b](https://github.com/cdata/noosphere/commit/704652bba2a2d9b241799b97808c7a249f0c38a9))
+* Limit delegated UCAN's lifetime to authorization token's lifetime where appropriate. ([#249](https://github.com/cdata/noosphere/issues/249)) ([b62fb88](https://github.com/cdata/noosphere/commit/b62fb888e16718cb84f33aa93c14385ddef4d8d1))
+
+
+### Miscellaneous Chores
+
+* Templatize the two IPFS HTTP APIs as noosphere_ipfs::IpfsClient, and reconfigure KuboStorage as IpfsStorage, operating on IpfsClient rather than a URL. ([#252](https://github.com/cdata/noosphere/issues/252)) ([518beae](https://github.com/cdata/noosphere/commit/518beae563bd04c921ee3c6641a7249f14c611e4))
+* Update IPLD-adjacent dependencies ([#180](https://github.com/cdata/noosphere/issues/180)) ([1a1114b](https://github.com/cdata/noosphere/commit/1a1114b0c6277ea2c0d879e43191e962eb2e462b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * noosphere-storage bumped from 0.6.2 to 0.7.0
+    * noosphere-core bumped from 0.10.2 to 0.11.0
+    * noosphere bumped from 0.10.2 to 0.11.0
+    * noosphere-ipfs bumped from 0.4.2 to 0.5.0
+
 ## [0.6.2](https://github.com/subconsciousnetwork/noosphere/compare/noosphere-ns-v0.6.1...noosphere-ns-v0.6.2) (2023-05-05)
 
 
