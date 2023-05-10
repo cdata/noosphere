@@ -151,8 +151,8 @@ jobs:
           set +H
 
           export MESSAGE="feat!: Update Swift Package Noosphere dependency to $NOOSPHERE_VERSION"
-          export SHA=$( git rev-parse main:Package.swift )
-          export CONTENT=$( base64 -i Package.swift )
+          export SHA=$(git rev-parse main:Package.swift)
+          export CONTENT=$(base64 -i Package.swift)
 
           # Update Package.swift via the Github API (we do it this way to get 'easy' commit signing)
           # https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#create-or-update-file-contents
@@ -167,6 +167,6 @@ jobs:
           # Also add a tag for the SwiftNoosphere release that correlates with the latest Noosphere release
           # https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#create-a-reference
 
-          gh api --method PUT /repos/cdata/noosphere/git/refs \
+          gh api --method POST /repos/cdata/noosphere/git/refs \
             --field ref="refs/tags/swift-$NOOSPHERE_VERSION" \
             --field sha="$COMMIT_SHA_TO_TAG"
