@@ -37,6 +37,13 @@
     * noosphere-sphere bumped from 0.5.5 to 0.5.6
     * noosphere-into bumped from 0.8.6 to 0.8.7
 
+## [0.12.3](https://github.com/cdata/noosphere/compare/noosphere-v0.12.2...noosphere-v0.12.3) (2023-05-10)
+
+
+### Features
+
+* Such dox ([67d20c4](https://github.com/cdata/noosphere/commit/67d20c4696a31b13c4bec9676a8acd2362126295))
+
 ## [0.12.2](https://github.com/cdata/noosphere/compare/noosphere-v0.12.1...noosphere-v0.12.2) (2023-05-10)
 
 
