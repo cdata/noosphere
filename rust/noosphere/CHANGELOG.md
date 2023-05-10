@@ -37,6 +37,13 @@
     * noosphere-sphere bumped from 0.5.5 to 0.5.6
     * noosphere-into bumped from 0.8.6 to 0.8.7
 
+## [0.12.2](https://github.com/cdata/noosphere/compare/noosphere-v0.12.1...noosphere-v0.12.2) (2023-05-10)
+
+
+### Features
+
+* Load bearing comments ([7791864](https://github.com/cdata/noosphere/commit/77918649d6c54aad6d59d06a6cad849eacf57b15))
+
 ## [0.12.1](https://github.com/cdata/noosphere/compare/noosphere-v0.12.0...noosphere-v0.12.1) (2023-05-09)
 
 
