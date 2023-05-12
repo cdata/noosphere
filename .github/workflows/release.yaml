@@ -48,83 +48,84 @@ jobs:
           extra-files: |
             Cargo.toml
 
-  noosphere-cli-build:
-    needs: ['release-please']
-    if: ${{ needs['release-please'].outputs.noosphere_cli_released }}
-    uses: ./.github/workflows/noosphere_cli_build.yaml
+  # noosphere-cli-build:
+  #   needs: ['release-please']
+  #   if: ${{ needs['release-please'].outputs.noosphere_cli_released }}
+  #   uses: ./.github/workflows/noosphere_cli_build.yaml
 
-  noosphere-cli-release-artifacts:
-    name: 'Add Noosphere CLI artifacts to release'
-    needs: ['release-please', 'noosphere-cli-build']
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Download build artifacts'
-        uses: actions/download-artifact@v3
+  # noosphere-cli-release-artifacts:
+  #   name: 'Add Noosphere CLI artifacts to release'
+  #   needs: ['release-please', 'noosphere-cli-build']
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: 'Download build artifacts'
+  #       uses: actions/download-artifact@v3
 
-      - name: 'Generate checksums'
-        run: for file in orb-*/orb-*; do openssl dgst -sha256 -r "$file" | awk '{print $1}' > "${file}.sha256"; done
+  #     - name: 'Generate checksums'
+  #       run: for file in orb-*/orb-*; do openssl dgst -sha256 -r "$file" | awk '{print $1}' > "${file}.sha256"; done
 
-      # NOTE: The release has to be published before adding build artifacts,
-      # otherwise the upload causes a different release to be made (???)
-      - name: 'Publish release'
-        run: gh release edit ${{ needs['release-please'].outputs.noosphere_cli_release_tag_name }} --draft=false --repo=cdata/noosphere
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     # NOTE: The release has to be published before adding build artifacts,
+  #     # otherwise the upload causes a different release to be made (???)
+  #     - name: 'Publish release'
+  #       run: gh release edit ${{ needs['release-please'].outputs.noosphere_cli_release_tag_name }} --draft=false --repo=cdata/noosphere
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 'Add build artifacts to release'
-        uses: softprops/action-gh-release@v1
-        with:
-          files: orb-*/orb-*
-          tag_name: ${{ needs['release-please'].outputs.noosphere_cli_release_tag_name }}
+  #     - name: 'Add build artifacts to release'
+  #       uses: softprops/action-gh-release@v1
+  #       with:
+  #         files: orb-*/orb-*
+  #         tag_name: ${{ needs['release-please'].outputs.noosphere_cli_release_tag_name }}
 
-  noosphere-apple-build:
-    name: 'Build Noosphere artifacts (Apple)'
-    needs: ['release-please']
-    if: ${{ needs['release-please'].outputs.noosphere_released }}
-    uses: ./.github/workflows/noosphere_apple_build.yaml
+  # noosphere-apple-build:
+  #   name: 'Build Noosphere artifacts (Apple)'
+  #   needs: ['release-please']
+  #   if: ${{ needs['release-please'].outputs.noosphere_released }}
+  #   uses: ./.github/workflows/noosphere_apple_build.yaml
 
-  noosphere-release-artifacts:
-    name: 'Add Noosphere artifacts to release'
-    needs: ['release-please', 'noosphere-apple-build']
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Download XCode Framework artifact'
-        uses: actions/download-artifact@v3
-        with:
-          name: libnoosphere_apple_framework
+  # noosphere-release-artifacts:
+  #   name: 'Add Noosphere artifacts to release'
+  #   needs: ['release-please', 'noosphere-apple-build']
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: 'Download XCode Framework artifact'
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: libnoosphere_apple_framework
 
-      - name: 'Generate checksum'
-        run: openssl dgst -sha256 ./libnoosphere-apple-xcframework.zip > ./libnoosphere-apple-xcframework.zip.sha256
+  #     - name: 'Generate checksum'
+  #       run: openssl dgst -sha256 ./libnoosphere-apple-xcframework.zip > ./libnoosphere-apple-xcframework.zip.sha256
 
-      # NOTE: The release has to be published before adding build artifacts,
-      # otherwise the upload causes a different release to be made (???)
-      - name: 'Publish release'
-        run: gh release edit ${{ needs['release-please'].outputs.noosphere_release_tag_name }} --draft=false --repo=cdata/noosphere
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     # NOTE: The release has to be published before adding build artifacts,
+  #     # otherwise the upload causes a different release to be made (???)
+  #     - name: 'Publish release'
+  #       run: gh release edit ${{ needs['release-please'].outputs.noosphere_release_tag_name }} --draft=false --repo=cdata/noosphere
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 'Add build artifacts to release'
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            libnoosphere-apple-xcframework.zip
-            libnoosphere-apple-xcframework.zip.sha256
-          tag_name: ${{ needs['release-please'].outputs.noosphere_release_tag_name }}
+  #     - name: 'Add build artifacts to release'
+  #       uses: softprops/action-gh-release@v1
+  #       with:
+  #         files: |
+  #           libnoosphere-apple-xcframework.zip
+  #           libnoosphere-apple-xcframework.zip.sha256
+  #         tag_name: ${{ needs['release-please'].outputs.noosphere_release_tag_name }}
 
   update-swift-noosphere-binary-target:
     name: 'Update SwiftNoosphere binary target'
-    needs: ['release-please', 'noosphere-release-artifacts']
+    needs: ['release-please']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: 'Download XCode Framework artifact'
-        uses: actions/download-artifact@v3
-        with:
-          name: libnoosphere_apple_framework
+      # - name: 'Download XCode Framework artifact'
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: libnoosphere_apple_framework
 
       - name: 'Generate checksum'
         id: generate-checksum
         run: |
+          date > ./libnoosphere-apple-xcframework.zip
           CHECKSUM=`openssl dgst -r -sha256 ./libnoosphere-apple-xcframework.zip | cut -d " " -f 1`
           echo "checksum=$CHECKSUM" >> $GITHUB_OUTPUT
       - name: 'Modify Package.swift'
@@ -139,37 +140,27 @@ jobs:
         with:
           name: swift-package-manifest
           path: ./Package.swift
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v5
+        with:
+          gpg_private_key: ${{ secrets.GPG_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
       - name: 'Commit and tag Package.swift for latest release'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-          GPG_KEY: ${{ secrets.GPG_KEY }}
-          NOOSPHERE_VERSION: ${{ needs.release-please.outputs.noosphere_release_tag_name }}
+          # NOOSPHERE_VERSION: ${{ needs.release-please.outputs.noosphere_release_tag_name }}
+          NOOSPHERE_VERSION: 'noosphere-v1.2.4'
         run: |
           # Turn off history expansion so that Bash doesn't freak out about $MESSAGE contents
           # https://stackoverflow.com/a/11816138
           set +H
 
-          mkdir -p ~/.gnupg
-
-          echo "
-          default-cache-ttl       1800
-          default-cache-ttl-ssh   1800
-          max-cache-ttl           2400
-          max-cache-ttl-ssh       2400" > ~/.gnupg/gpg-agent.conf
-
-          sudo apt install gpg-agent
-          gpg-agent --daemon
-
-          echo $GPG_KEY | gpg --passphrase "$GPG_PASSPHRASE" --pinentry-mode loopback --import
-          export GPG_KEY_ID=$(gpg --list-signatures --with-colons | grep 'sig' | grep 'Subconscious Ops' | head -n 1 | cut -d':' -f5)
-
-          git config --global --unset gpg.format
+          # git config --global --unset gpg.format
           git config --global user.name 'Subconscious Ops'
           git config --global user.email 'github-ops@subconscious.network'
 
-          git config --global user.signingkey $GPG_KEY_ID
-          git config --global commit.gpgsign true
-
-          git commit -am "feat!: Update Swift Package Noosphere dependency to $NOOSPHERE_VERSION"
-          git push origin main
+          git commit -S -am "feat!: Update Swift Package Noosphere dependency to $NOOSPHERE_VERSION"
+          git tag "swift-$NOOSPHERE_VERSION"
+          git push --tags origin main
