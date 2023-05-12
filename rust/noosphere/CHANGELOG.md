@@ -37,6 +37,13 @@
     * noosphere-sphere bumped from 0.5.5 to 0.5.6
     * noosphere-into bumped from 0.8.6 to 0.8.7
 
+## [0.12.4](https://github.com/cdata/noosphere/compare/noosphere-v0.12.3...noosphere-v0.12.4) (2023-05-12)
+
+
+### Features
+
+* Hai ([3011a77](https://github.com/cdata/noosphere/commit/3011a7713fc4dd941f741c9f8677ab56c99f85a1))
+
 ## [0.12.3](https://github.com/cdata/noosphere/compare/noosphere-v0.12.2...noosphere-v0.12.3) (2023-05-10)
 
 

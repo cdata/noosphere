@@ -75,6 +75,10 @@
   * dependencies
     * noosphere bumped from 0.12.2 to 0.12.3
 
+* The following workspace dependencies were updated
+  * dependencies
+    * noosphere bumped from 0.12.3 to 0.12.4
+
 ## [0.8.0](https://github.com/cdata/noosphere/compare/noosphere-ns-v0.7.0...noosphere-ns-v0.8.0) (2023-05-09)
 
 

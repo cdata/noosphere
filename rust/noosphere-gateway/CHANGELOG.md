@@ -74,6 +74,11 @@
     * noosphere-ns bumped from 0.8.2 to 0.8.3
     * noosphere bumped from 0.12.2 to 0.12.3
 
+* The following workspace dependencies were updated
+  * dependencies
+    * noosphere-ns bumped from 0.8.3 to 0.8.4
+    * noosphere bumped from 0.12.3 to 0.12.4
+
 ## [0.6.0](https://github.com/cdata/noosphere/compare/noosphere-gateway-v0.5.0...noosphere-gateway-v0.6.0) (2023-05-09)
 
 
