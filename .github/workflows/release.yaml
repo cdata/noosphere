@@ -142,31 +142,34 @@ jobs:
       - name: 'Commit and tag Package.swift for latest release'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          GPG_KEY: ${{ secrets.GPG_KEY }}
           NOOSPHERE_VERSION: ${{ needs.release-please.outputs.noosphere_release_tag_name }}
         run: |
-          # Adapted from https://gist.github.com/swinton/03e84635b45c78353b1f71e41007fc7c
-
           # Turn off history expansion so that Bash doesn't freak out about $MESSAGE contents
           # https://stackoverflow.com/a/11816138
           set +H
 
-          export MESSAGE="feat!: Update Swift Package Noosphere dependency to $NOOSPHERE_VERSION"
-          export SHA=$(git rev-parse main:Package.swift)
-          export CONTENT=$(base64 -i Package.swift)
+          mkdir -p ~/.gnupg
 
-          # Update Package.swift via the Github API (we do it this way to get 'easy' commit signing)
-          # https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#create-or-update-file-contents
+          echo "
+          default-cache-ttl       1800
+          default-cache-ttl-ssh   1800
+          max-cache-ttl           2400
+          max-cache-ttl-ssh       2400" > ~/.gnupg/gpg-agent.conf
 
-          export COMMIT_SHA_TO_TAG=$(gh api --method PUT /repos/cdata/noosphere/contents/Package.swift \
-            --field message="$MESSAGE" \
-            --field content="$CONTENT" \
-            --field encoding="base64" \
-            --field branch="main" \
-            --field sha="$SHA" | jq .commit.sha | xargs echo)
+          sudo apt install gpg-agent
+          gpg-agent --daemon
 
-          # Also add a tag for the SwiftNoosphere release that correlates with the latest Noosphere release
-          # https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#create-a-reference
+          echo $GPG_KEY | gpg --passphrase "$GPG_PASSPHRASE" --pinentry-mode loopback --import
+          export GPG_KEY_ID=$(gpg --list-signatures --with-colons | grep 'sig' | grep 'Subconscious Ops' | head -n 1 | cut -d':' -f5)
 
-          gh api --method POST /repos/cdata/noosphere/git/refs \
-            --field ref="refs/tags/swift-$NOOSPHERE_VERSION" \
-            --field sha="$COMMIT_SHA_TO_TAG"
+          git config --global --unset gpg.format
+          git config --global user.name 'Subconscious Ops'
+          git config --global user.email 'github-ops@subconscious.network'
+
+          git config --global user.signingkey $GPG_KEY_ID
+          git config --global commit.gpgsign true
+
+          git commit -am "feat!: Update Swift Package Noosphere dependency to $NOOSPHERE_VERSION"
+          git push origin main
