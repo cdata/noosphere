@@ -1,197 +1,27 @@
+name: Release-plz
+
+permissions:
+  pull-requests: write
+  contents: write
+
 on:
   push:
     branches:
       - main
 
-name: 'Perform a release'
-
 jobs:
-  # NOTE: This step is stateful. When there are unreleased changes on main, it
-  # generates a candidate PR for the next release based on all the unreleased
-  # changes and their implications for the versions of our packages. If such a
-  # PR already exists, it will detect it and update in place. These PRs are
-  # intended to stick around and update until a release is ready to be made.
-  # Once merged, this step will detect the merge and generate Git tags and
-  # corresponding Github releases for each package being released. Only at that
-  # time will the rest of the steps in this workflow run.
-  release-please:
-    name: 'Prepare a release'
+  release-plz:
+    name: Release-plz
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.repository_owner == 'subconsciousnetwork'
-    outputs:
-      noosphere_cli_released: ${{ steps.release.outputs['rust/noosphere-cli--release_created'] }}
-      noosphere_cli_release_tag_name: ${{ steps.release.outputs['rust/noosphere-cli--tag_name'] }}
-      noosphere_released: ${{ steps.release.outputs['rust/noosphere--release_created'] }}
-      noosphere_release_tag_name: ${{ steps.release.outputs['rust/noosphere--tag_name'] }}
-      anything_was_released:
-        ${{ steps.release.outputs['rust/noosphere--release_created'] ||
-        steps.release.outputs['rust/noosphere-api--release_created'] ||
-        steps.release.outputs['rust/noosphere-cli--release_created'] ||
-        steps.release.outputs['rust/noosphere-collections--release_created'] ||
-        steps.release.outputs['rust/noosphere-core--release_created'] ||
-        steps.release.outputs['rust/noosphere-gateway--release_created'] ||
-        steps.release.outputs['rust/noosphere-ipfs--release_created'] ||
-        steps.release.outputs['rust/noosphere-into--release_created'] ||
-        steps.release.outputs['rust/noosphere-ns--release_created'] ||
-        steps.release.outputs['rust/noosphere-sphere--release_created'] ||
-        steps.release.outputs['rust/noosphere-storage--release_created'] }}
     steps:
-      - uses: chainguard-dev/actions/setup-gitsign@main
-      - name: 'Run release-please'
-        id: release
-        uses: cdata/release-please-action@fix/support-cargo-workspace-dependency-inheritance
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          default-branch: main
-          command: manifest
-          release-type: rust
-          extra-files: |
-            Cargo.toml
-
-  noosphere-cli-build:
-    needs: ['release-please']
-    if: ${{ needs['release-please'].outputs.noosphere_cli_released }}
-    uses: ./.github/workflows/noosphere_cli_build.yaml
-
-  noosphere-cli-release-artifacts:
-    name: 'Add Noosphere CLI artifacts to release'
-    needs: ['release-please', 'noosphere-cli-build']
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Download build artifacts'
-        uses: actions/download-artifact@v3
-
-      - name: 'Generate checksums'
-        run: for file in orb-*/orb-*; do openssl dgst -sha256 -r "$file" | awk '{print $1}' > "${file}.sha256"; done
-
-      # NOTE: The release has to be published before adding build artifacts,
-      # otherwise the upload causes a different release to be made (???)
-      - name: 'Publish release'
-        run: gh release edit ${{ needs['release-please'].outputs.noosphere_cli_release_tag_name }} --draft=false --repo=subconsciousnetwork/noosphere
+          fetch-depth: 0
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - name: Run release-plz
+        uses: MarcoIeni/release-plz-action@v0.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 'Add build artifacts to release'
-        uses: softprops/action-gh-release@v1
-        with:
-          files: orb-*/orb-*
-          tag_name: ${{ needs['release-please'].outputs.noosphere_cli_release_tag_name }}
-
-  build-container-images:
-    name: 'Build container images for release'
-    needs: ['release-please']
-    if: ${{ needs['release-please'].outputs.noosphere_released }}
-    uses: ./.github/workflows/container_images.yaml
-    secrets: inherit
-    with:
-      image-tag: ${{ needs['release-please'].outputs.noosphere_release_tag_name }}
-
-  noosphere-apple-build:
-    name: 'Build Noosphere artifacts (Apple)'
-    needs: ['release-please']
-    if: ${{ needs['release-please'].outputs.noosphere_released }}
-    uses: ./.github/workflows/noosphere_apple_build.yaml
-
-  noosphere-release-artifacts:
-    name: 'Add Noosphere artifacts to release'
-    needs: ['release-please', 'noosphere-apple-build']
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Download XCode Framework artifact'
-        uses: actions/download-artifact@v3
-        with:
-          name: libnoosphere_apple_framework
-
-      - name: 'Generate checksum'
-        run: openssl dgst -sha256 ./libnoosphere-apple-xcframework.zip > ./libnoosphere-apple-xcframework.zip.sha256
-
-      # NOTE: The release has to be published before adding build artifacts,
-      # otherwise the upload causes a different release to be made (???)
-      - name: 'Publish release'
-        run: gh release edit ${{ needs['release-please'].outputs.noosphere_release_tag_name }} --draft=false --repo=subconsciousnetwork/noosphere
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 'Add build artifacts to release'
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            libnoosphere-apple-xcframework.zip
-            libnoosphere-apple-xcframework.zip.sha256
-          tag_name: ${{ needs['release-please'].outputs.noosphere_release_tag_name }}
-
-  update-swift-noosphere-binary-target:
-    name: 'Update SwiftNoosphere binary target'
-    needs: ['release-please', 'noosphere-release-artifacts']
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.PUSH_TOKEN }}
-      - name: 'Download XCode Framework artifact'
-        uses: actions/download-artifact@v3
-        with:
-          name: libnoosphere_apple_framework
-
-      - name: 'Generate checksum'
-        id: generate-checksum
-        run: |
-          CHECKSUM=`openssl dgst -r -sha256 ./libnoosphere-apple-xcframework.zip | cut -d " " -f 1`
-          echo "checksum=$CHECKSUM" >> $GITHUB_OUTPUT
-      - name: 'Modify Package.swift'
-        run: |
-          URL="https://github.com/subconsciousnetwork/noosphere/releases/download/${{ needs.release-please.outputs.noosphere_release_tag_name }}/libnoosphere-apple-xcframework.zip"
-
-          sed -i -e "s#url: \"[^\"]*\",#url: \"$URL\",#" ./Package.swift
-          sed -i -e "s#checksum: \"[^\"]*\"),#checksum: \"${{ steps.generate-checksum.outputs.checksum }}\"),#" ./Package.swift
-      - uses: actions/upload-artifact@v3
-        with:
-          name: swift-package-manifest
-          path: ./Package.swift
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v5
-        with:
-          gpg_private_key: ${{ secrets.GPG_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-      - name: 'Commit and tag Package.swift for latest release'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NOOSPHERE_VERSION: ${{ needs.release-please.outputs.noosphere_release_tag_name }}
-        run: |
-          # Turn off history expansion so that Bash doesn't freak out about $MESSAGE contents
-          # https://stackoverflow.com/a/11816138
-          set +H
-
-          git config --global user.name 'Subconscious Ops'
-          git config --global user.email 'github-ops@subconscious.network'
-
-          git commit -S -am "feat!: Update Swift Package Noosphere dependency to $NOOSPHERE_VERSION"
-          git tag "swift-$NOOSPHERE_VERSION"
-          git push --tags origin main
-
-  # Publishes crates to crates.io in dependency order. This command is
-  # idempotent and won't re-publish crates that are already published, so it's
-  # safe for us to run it indiscriminately
-  publish-crates:
-    name: 'Publish to crates.io'
-    needs: ['release-please']
-    runs-on: ubuntu-latest
-    if: ${{ needs['release-please'].outputs.anything_was_released }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: Swatinem/rust-cache@v2
-      - name: 'Setup Rust'
-        run: |
-          curl -sSf https://sh.rustup.rs | sh -s -- -y
-      - name: 'Install environment packages'
-        run: |
-          sudo apt-get update -qqy
-          sudo apt-get install protobuf-compiler cmake libssl-dev pkg-config
-      - name: 'Install cargo-workspaces'
-        run: cargo install --force cargo-workspaces
-      - name: 'Publish crates'
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
-        run: cargo workspaces publish --from-git --allow-dirty
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
