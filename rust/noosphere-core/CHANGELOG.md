@@ -395,6 +395,12 @@
 
 * `SphereFs` is initialized with key material ([#140](https://github.com/subconsciousnetwork/noosphere/issues/140)) ([af48061](https://github.com/subconsciousnetwork/noosphere/commit/af4806114ca8f7703e0a888c7f369a4a4ed69c00))
 
+## [0.16.0](https://github.com/cdata/noosphere/compare/noosphere-core-v0.15.2...noosphere-core-v0.16.0) - 2023-09-19
+
+### Added
+- Introduce RocksDbStorage, genericize storage throughout. ([#623](https://github.com/cdata/noosphere/pull/623))
+- [**breaking**] Replace `Bundle` with CAR streams in push ([#624](https://github.com/cdata/noosphere/pull/624))
+
 ## [0.1.0](https://github.com/subconsciousnetwork/noosphere/compare/noosphere-core-v0.1.0-alpha.1...noosphere-core-v0.1.0) (2022-11-09)
 
 

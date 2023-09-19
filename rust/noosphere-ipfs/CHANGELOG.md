@@ -292,6 +292,69 @@
 
 * Enable `noosphere-ipfs` to compile on its own ([764eeb7](https://github.com/subconsciousnetwork/noosphere/commit/764eeb7d24df2773afd5bce934f2de6fc2de2640))
 
+## [0.8.0](https://github.com/cdata/noosphere/compare/noosphere-ipfs-v0.7.4...noosphere-ipfs-v0.8.0) - 2023-09-19
+
+### Added
+- [**breaking**] Replace `Bundle` with CAR streams in push ([#624](https://github.com/cdata/noosphere/pull/624))
+- `orb sphere history` and `orb sphere render` ([#576](https://github.com/cdata/noosphere/pull/576))
+- [**breaking**] Replace `noosphere-car` with `iroh-car` throughout the Noosphere crates. ([#492](https://github.com/cdata/noosphere/pull/492))
+- Consolidate `NsRecord` implementation in`LinkRecord`. Fixes [#395](https://github.com/cdata/noosphere/pull/395) ([#399](https://github.com/cdata/noosphere/pull/399))
+- [**breaking**] Revised tracing configuration ([#342](https://github.com/cdata/noosphere/pull/342))
+- Update IPLD-related dependencies ([#327](https://github.com/cdata/noosphere/pull/327))
+- Dot syntax when traversing by petname ([#306](https://github.com/cdata/noosphere/pull/306))
+- Add instrumentation to `noosphere-ns` and `noosphere-ipfs`. ([#304](https://github.com/cdata/noosphere/pull/304))
+- [**breaking**] Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/pull/284))
+- [**breaking**] Fork `iroh-car` as `noosphere-car` ([#283](https://github.com/cdata/noosphere/pull/283))
+- [**breaking**] Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/pull/253))
+- Implement `IpfsClient::get_block` for Kubo for orb/orb-ns integration with IPFS. ([#251](https://github.com/cdata/noosphere/pull/251))
+- Introduce `noosphere-gateway` crate ([#238](https://github.com/cdata/noosphere/pull/238))
+- Introduce `noosphere-ipfs` crate ([#203](https://github.com/cdata/noosphere/pull/203))
+
+### Fixed
+- Increase allowed request body payload size ([#608](https://github.com/cdata/noosphere/pull/608))
+- Better handling of removed content in `orb` ([#588](https://github.com/cdata/noosphere/pull/588))
+- [**breaking**] Enable incremental sphere replication ([#409](https://github.com/cdata/noosphere/pull/409))
+- Several fixes for noosphere-ipfs as it gets further integrated ([#302](https://github.com/cdata/noosphere/pull/302))
+- Introduce `TryOrReset` to help worker threads ([#300](https://github.com/cdata/noosphere/pull/300))
+- [**breaking**] Reconfigure module dependencies so that noosphere-ipfs depends on noosphere-storage, and not the other way around creating a cycle. ([#254](https://github.com/cdata/noosphere/pull/254))
+- Enable `noosphere-ipfs` to compile on its own
+
+### Other
+- release main ([#614](https://github.com/cdata/noosphere/pull/614))
+- Clean up redundant dependencies, replace lingering async-std usage with tokio, promote tokio to workspace dependency. ([#590](https://github.com/cdata/noosphere/pull/590))
+- release main ([#581](https://github.com/cdata/noosphere/pull/581))
+- release main ([#537](https://github.com/cdata/noosphere/pull/537))
+- promote url crate to workspace dependency. ([#546](https://github.com/cdata/noosphere/pull/546))
+- release main ([#517](https://github.com/cdata/noosphere/pull/517))
+- *(deps)* bump hyper from 0.14.26 to 0.14.27 ([#478](https://github.com/cdata/noosphere/pull/478))
+- release main ([#488](https://github.com/cdata/noosphere/pull/488))
+- release main ([#458](https://github.com/cdata/noosphere/pull/458))
+- release main ([#453](https://github.com/cdata/noosphere/pull/453))
+- release main ([#443](https://github.com/cdata/noosphere/pull/443))
+- release main ([#418](https://github.com/cdata/noosphere/pull/418))
+- release main ([#413](https://github.com/cdata/noosphere/pull/413))
+- release main ([#405](https://github.com/cdata/noosphere/pull/405))
+- Remove unused dependencies, and update/replace dependencies with existing security advisories. Fixes [#62](https://github.com/cdata/noosphere/pull/62). ([#404](https://github.com/cdata/noosphere/pull/404))
+- release main ([#370](https://github.com/cdata/noosphere/pull/370))
+- release main ([#363](https://github.com/cdata/noosphere/pull/363))
+- release main ([#359](https://github.com/cdata/noosphere/pull/359))
+- release main ([#349](https://github.com/cdata/noosphere/pull/349))
+- release main ([#336](https://github.com/cdata/noosphere/pull/336))
+- Add cargo fmt/clippy tests in Linux CI. Fixes [#94](https://github.com/cdata/noosphere/pull/94). ([#341](https://github.com/cdata/noosphere/pull/341))
+- release main ([#328](https://github.com/cdata/noosphere/pull/328))
+- release main ([#323](https://github.com/cdata/noosphere/pull/323))
+- release main ([#301](https://github.com/cdata/noosphere/pull/301))
+- release main ([#295](https://github.com/cdata/noosphere/pull/295))
+- Revise default logging ([#299](https://github.com/cdata/noosphere/pull/299))
+- release main ([#279](https://github.com/cdata/noosphere/pull/279))
+- clippy fix and CI lint fix ([#277](https://github.com/cdata/noosphere/pull/277))
+- release main ([#236](https://github.com/cdata/noosphere/pull/236))
+- [**breaking**] Templatize the two IPFS HTTP APIs as noosphere_ipfs::IpfsClient, and reconfigure KuboStorage as IpfsStorage, operating on IpfsClient rather than a URL. ([#252](https://github.com/cdata/noosphere/pull/252))
+- release main ([#227](https://github.com/cdata/noosphere/pull/227))
+- Add README for `noosphere-ipfs` crate
+- release main ([#212](https://github.com/cdata/noosphere/pull/212))
+- release main ([#205](https://github.com/cdata/noosphere/pull/205))
+
 ## 0.1.0 (2023-01-31)
 
 

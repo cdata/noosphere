@@ -152,6 +152,16 @@
 * Refactor storage interfaces ([#178](https://github.com/subconsciousnetwork/noosphere/issues/178)) ([4db55c4](https://github.com/subconsciousnetwork/noosphere/commit/4db55c4cba56b329a638a4227e7f3247ad8d319c))
 * Syndicate sphere revisions to IPFS Kubo ([#177](https://github.com/subconsciousnetwork/noosphere/issues/177)) ([e269e04](https://github.com/subconsciousnetwork/noosphere/commit/e269e0484b73e0f5507406d57a2c06cf849bee3d))
 
+## [0.9.0](https://github.com/cdata/noosphere/compare/noosphere-storage-v0.8.1...noosphere-storage-v0.9.0) - 2023-09-19
+
+### Added
+- Introduce RocksDbStorage, genericize storage throughout. ([#623](https://github.com/cdata/noosphere/pull/623))
+- [**breaking**] Replace `Bundle` with CAR streams in push ([#624](https://github.com/cdata/noosphere/pull/624))
+
+### Other
+- *(deps)* bump rexie from 0.4.2 to 0.5.0 ([#641](https://github.com/cdata/noosphere/pull/641))
+- Clean up redundant dependencies, replace lingering async-std usage with tokio, promote tokio to workspace dependency. ([#590](https://github.com/cdata/noosphere/pull/590))
+
 ## [0.1.0](https://github.com/subconsciousnetwork/noosphere/compare/noosphere-storage-v0.1.0-alpha.1...noosphere-storage-v0.1.0) (2022-11-09)
 
 

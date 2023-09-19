@@ -378,6 +378,78 @@
     * noosphere-api bumped from 0.6.0 to 0.7.0
     * noosphere-ipfs bumped from 0.2.0 to 0.3.0
 
+## [0.11.0](https://github.com/cdata/noosphere/compare/noosphere-sphere-v0.10.2...noosphere-sphere-v0.11.0) - 2023-09-19
+
+### Added
+- [**breaking**] Replace `Bundle` with CAR streams in push ([#624](https://github.com/cdata/noosphere/pull/624))
+- Ensure adopted link records are fresher than previous entries. Fixes [#258](https://github.com/cdata/noosphere/pull/258), fixes [#562](https://github.com/cdata/noosphere/pull/562) ([#578](https://github.com/cdata/noosphere/pull/578))
+- `orb sphere history` and `orb sphere render` ([#576](https://github.com/cdata/noosphere/pull/576))
+- [**breaking**] `orb` uses latest Noosphere capabilities ([#530](https://github.com/cdata/noosphere/pull/530))
+- [**breaking**] C FFI to verify authorizations ([#510](https://github.com/cdata/noosphere/pull/510))
+- [**breaking**] Replace `noosphere-car` with `iroh-car` throughout the Noosphere crates. ([#492](https://github.com/cdata/noosphere/pull/492))
+- [**breaking**] Authorize and revoke APIs ([#420](https://github.com/cdata/noosphere/pull/420))
+- [**breaking**] Update to `rs-ucan` 0.4.0, implementing UCAN 0.10ish. ([#449](https://github.com/cdata/noosphere/pull/449))
+- Consolidate `NsRecord` implementation in`LinkRecord`. Fixes [#395](https://github.com/cdata/noosphere/pull/395) ([#399](https://github.com/cdata/noosphere/pull/399))
+- Validate petnames and slugs, disallow an empty strings. ([#382](https://github.com/cdata/noosphere/pull/382))
+- Get petnames assigned to a DID for a sphere ([#384](https://github.com/cdata/noosphere/pull/384))
+- Make `anyhow` a workspace dependency in `noosphere-sphere`
+- [**breaking**] Revised tracing configuration ([#342](https://github.com/cdata/noosphere/pull/342))
+- Update IPLD-related dependencies ([#327](https://github.com/cdata/noosphere/pull/327))
+- [**breaking**] Some non-blocking, callback-based C FFI ([#322](https://github.com/cdata/noosphere/pull/322))
+- Sphere writes do not block immutable reads ([#321](https://github.com/cdata/noosphere/pull/321))
+- Dot syntax when traversing by petname ([#306](https://github.com/cdata/noosphere/pull/306))
+- [**breaking**] Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/pull/284))
+- [**breaking**] Revise links and gateway ([#278](https://github.com/cdata/noosphere/pull/278))
+- [**breaking**] Implement C FFI for petname management ([#271](https://github.com/cdata/noosphere/pull/271))
+- [**breaking**] Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/pull/253))
+
+### Fixed
+- Increase allowed request body payload size ([#608](https://github.com/cdata/noosphere/pull/608))
+- Disallow "did:" as petnames, adding self to address book ([#387](https://github.com/cdata/noosphere/pull/387))
+- Resolve petnames in correct order ([#412](https://github.com/cdata/noosphere/pull/412))
+- [**breaking**] Enable incremental sphere replication ([#409](https://github.com/cdata/noosphere/pull/409))
+- Ensure petname link records are replicated ([#377](https://github.com/cdata/noosphere/pull/377))
+- Removed petnames stay removed ([#373](https://github.com/cdata/noosphere/pull/373))
+- Unreachable petname sequence is not an error ([#310](https://github.com/cdata/noosphere/pull/310))
+
+### Other
+- release main ([#614](https://github.com/cdata/noosphere/pull/614))
+- Clean up redundant dependencies, replace lingering async-std usage with tokio, promote tokio to workspace dependency. ([#590](https://github.com/cdata/noosphere/pull/590))
+- release main ([#581](https://github.com/cdata/noosphere/pull/581))
+- release main ([#537](https://github.com/cdata/noosphere/pull/537))
+- *(deps)* bump wasm-bindgen-futures from 0.4.36 to 0.4.37 ([#543](https://github.com/cdata/noosphere/pull/543))
+- release main ([#517](https://github.com/cdata/noosphere/pull/517))
+- release main ([#488](https://github.com/cdata/noosphere/pull/488))
+- release main ([#458](https://github.com/cdata/noosphere/pull/458))
+- release main ([#453](https://github.com/cdata/noosphere/pull/453))
+- release main ([#443](https://github.com/cdata/noosphere/pull/443))
+- release main ([#418](https://github.com/cdata/noosphere/pull/418))
+- release main ([#413](https://github.com/cdata/noosphere/pull/413))
+- release main ([#405](https://github.com/cdata/noosphere/pull/405))
+- Remove unused dependencies, and update/replace dependencies with existing security advisories. Fixes [#62](https://github.com/cdata/noosphere/pull/62). ([#404](https://github.com/cdata/noosphere/pull/404))
+- release main ([#381](https://github.com/cdata/noosphere/pull/381))
+- release main ([#380](https://github.com/cdata/noosphere/pull/380))
+- release main ([#374](https://github.com/cdata/noosphere/pull/374))
+- release main ([#370](https://github.com/cdata/noosphere/pull/370))
+- release main ([#366](https://github.com/cdata/noosphere/pull/366))
+- release main ([#363](https://github.com/cdata/noosphere/pull/363))
+- release main ([#359](https://github.com/cdata/noosphere/pull/359))
+- release main ([#349](https://github.com/cdata/noosphere/pull/349))
+- release main ([#336](https://github.com/cdata/noosphere/pull/336))
+- Add cargo fmt/clippy tests in Linux CI. Fixes [#94](https://github.com/cdata/noosphere/pull/94). ([#341](https://github.com/cdata/noosphere/pull/341))
+- release main ([#328](https://github.com/cdata/noosphere/pull/328))
+- release main ([#323](https://github.com/cdata/noosphere/pull/323))
+- release main ([#314](https://github.com/cdata/noosphere/pull/314))
+- release main ([#301](https://github.com/cdata/noosphere/pull/301))
+- release main ([#295](https://github.com/cdata/noosphere/pull/295))
+- Revise default logging ([#299](https://github.com/cdata/noosphere/pull/299))
+- [**breaking**] Apply breaking domain concept in anticipation of beta ([#298](https://github.com/cdata/noosphere/pull/298))
+- release main ([#279](https://github.com/cdata/noosphere/pull/279))
+- Improvements to C FFI documentation. ([#285](https://github.com/cdata/noosphere/pull/285))
+- clippy fix and CI lint fix ([#277](https://github.com/cdata/noosphere/pull/277))
+- Add README.md for `noosphere-sphere`
+- release main ([#236](https://github.com/cdata/noosphere/pull/236))
+
 ## 0.1.0 (2023-03-14)
 
 

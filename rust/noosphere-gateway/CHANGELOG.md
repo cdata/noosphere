@@ -463,6 +463,12 @@
     * noosphere-api bumped from 0.6.0 to 0.7.0
     * noosphere bumped from 0.7.0 to 0.8.0
 
+## [0.9.0](https://github.com/cdata/noosphere/compare/noosphere-gateway-v0.8.2...noosphere-gateway-v0.9.0) - 2023-09-19
+
+### Added
+- Introduce RocksDbStorage, genericize storage throughout. ([#623](https://github.com/cdata/noosphere/pull/623))
+- [**breaking**] Replace `Bundle` with CAR streams in push ([#624](https://github.com/cdata/noosphere/pull/624))
+
 ## 0.1.0 (2023-03-14)
 
 
