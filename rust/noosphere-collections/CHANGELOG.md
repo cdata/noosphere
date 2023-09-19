@@ -140,6 +140,12 @@
   * dependencies
     * noosphere-storage bumped from 0.2.0 to 0.3.0
 
+## [0.7.0](https://github.com/cdata/noosphere/compare/noosphere-collections-v0.6.3...noosphere-collections-v0.7.0) - 2023-09-19
+
+### Other
+- use tokio::sync::OnceCell instead of async_once_cell::OnceCell. ([#642](https://github.com/cdata/noosphere/pull/642))
+- Clean up redundant dependencies, replace lingering async-std usage with tokio, promote tokio to workspace dependency. ([#590](https://github.com/cdata/noosphere/pull/590))
+
 ## [0.1.0](https://github.com/subconsciousnetwork/noosphere/compare/noosphere-collections-v0.1.1-alpha.1...noosphere-collections-v0.1.0) (2022-11-29)
 
 

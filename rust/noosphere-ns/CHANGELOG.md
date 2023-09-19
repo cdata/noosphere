@@ -503,6 +503,15 @@
     * noosphere-core bumped from 0.2.0 to 0.3.0
     * noosphere bumped from 0.2.0 to 0.3.0
 
+## [0.11.0](https://github.com/cdata/noosphere/compare/noosphere-ns-v0.10.2...noosphere-ns-v0.11.0) - 2023-09-19
+
+### Added
+- Introduce RocksDbStorage, genericize storage throughout. ([#623](https://github.com/cdata/noosphere/pull/623))
+- [**breaking**] Replace `Bundle` with CAR streams in push ([#624](https://github.com/cdata/noosphere/pull/624))
+
+### Other
+- *(deps)* bump clap from 4.4.3 to 4.4.4 ([#640](https://github.com/cdata/noosphere/pull/640))
+
 ## [0.1.0](https://github.com/subconsciousnetwork/noosphere/compare/noosphere-ns-v0.1.0-alpha.1...noosphere-ns-v0.1.0) (2022-11-09)
 
 

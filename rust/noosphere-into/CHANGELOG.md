@@ -420,6 +420,89 @@
     * noosphere-storage bumped from 0.1.0 to 0.2.0
     * noosphere-fs bumped from 0.1.0 to 0.2.0
 
+## [0.11.0](https://github.com/cdata/noosphere/compare/noosphere-into-v0.10.6...noosphere-into-v0.11.0) - 2023-09-19
+
+### Added
+- Introduce RocksDbStorage, genericize storage throughout. ([#623](https://github.com/cdata/noosphere/pull/623))
+- [**breaking**] Replace `Bundle` with CAR streams in push ([#624](https://github.com/cdata/noosphere/pull/624))
+- `orb sphere history` and `orb sphere render` ([#576](https://github.com/cdata/noosphere/pull/576))
+- [**breaking**] Authorize and revoke APIs ([#420](https://github.com/cdata/noosphere/pull/420))
+- Use `anyhow` workspace dep in `noosphere-into`
+- [**breaking**] Revised tracing configuration ([#342](https://github.com/cdata/noosphere/pull/342))
+- Update IPLD-related dependencies ([#327](https://github.com/cdata/noosphere/pull/327))
+- Dot syntax when traversing by petname ([#306](https://github.com/cdata/noosphere/pull/306))
+- [**breaking**] Traverse the Noosphere vast ([#284](https://github.com/cdata/noosphere/pull/284))
+- [**breaking**] Revise links and gateway ([#278](https://github.com/cdata/noosphere/pull/278))
+- [**breaking**] Petname resolution and synchronization in spheres and gateways ([#253](https://github.com/cdata/noosphere/pull/253))
+- Noosphere builds and runs tests on Windows ([#228](https://github.com/cdata/noosphere/pull/228))
+- Beautify the Sphere Viewer demo app ([#186](https://github.com/cdata/noosphere/pull/186))
+- Refactor storage interfaces ([#178](https://github.com/cdata/noosphere/pull/178))
+- Introduce pet names to spheres ([#154](https://github.com/cdata/noosphere/pull/154))
+- `SphereFs` is initialized with key material ([#140](https://github.com/cdata/noosphere/pull/140))
+
+### Fixed
+- [**breaking**] Enable incremental sphere replication ([#409](https://github.com/cdata/noosphere/pull/409))
+
+### Other
+- release main ([#614](https://github.com/cdata/noosphere/pull/614))
+- Clean up redundant dependencies, replace lingering async-std usage with tokio, promote tokio to workspace dependency. ([#590](https://github.com/cdata/noosphere/pull/590))
+- release main ([#581](https://github.com/cdata/noosphere/pull/581))
+- release main ([#537](https://github.com/cdata/noosphere/pull/537))
+- promote url crate to workspace dependency. ([#546](https://github.com/cdata/noosphere/pull/546))
+- Update and consolidate axum as a workspace dependency. ([#532](https://github.com/cdata/noosphere/pull/532))
+- Update and consolidate tower/tower-http as workspace dependency. ([#531](https://github.com/cdata/noosphere/pull/531))
+- release main ([#517](https://github.com/cdata/noosphere/pull/517))
+- release main ([#488](https://github.com/cdata/noosphere/pull/488))
+- release main ([#458](https://github.com/cdata/noosphere/pull/458))
+- release main ([#453](https://github.com/cdata/noosphere/pull/453))
+- release main ([#443](https://github.com/cdata/noosphere/pull/443))
+- release main ([#418](https://github.com/cdata/noosphere/pull/418))
+- release main ([#413](https://github.com/cdata/noosphere/pull/413))
+- release main ([#405](https://github.com/cdata/noosphere/pull/405))
+- Remove unused dependencies, and update/replace dependencies with existing security advisories. Fixes [#62](https://github.com/cdata/noosphere/pull/62). ([#404](https://github.com/cdata/noosphere/pull/404))
+- release main ([#381](https://github.com/cdata/noosphere/pull/381))
+- release main ([#380](https://github.com/cdata/noosphere/pull/380))
+- release main ([#374](https://github.com/cdata/noosphere/pull/374))
+- release main ([#372](https://github.com/cdata/noosphere/pull/372))
+- release main ([#370](https://github.com/cdata/noosphere/pull/370))
+- release main ([#366](https://github.com/cdata/noosphere/pull/366))
+- release main ([#363](https://github.com/cdata/noosphere/pull/363))
+- release main ([#359](https://github.com/cdata/noosphere/pull/359))
+- release main ([#349](https://github.com/cdata/noosphere/pull/349))
+- release main ([#336](https://github.com/cdata/noosphere/pull/336))
+- Add cargo fmt/clippy tests in Linux CI. Fixes [#94](https://github.com/cdata/noosphere/pull/94). ([#341](https://github.com/cdata/noosphere/pull/341))
+- release main ([#328](https://github.com/cdata/noosphere/pull/328))
+- release main ([#323](https://github.com/cdata/noosphere/pull/323))
+- release main ([#314](https://github.com/cdata/noosphere/pull/314))
+- release main ([#301](https://github.com/cdata/noosphere/pull/301))
+- release main ([#295](https://github.com/cdata/noosphere/pull/295))
+- Revise default logging ([#299](https://github.com/cdata/noosphere/pull/299))
+- [**breaking**] Apply breaking domain concept in anticipation of beta ([#298](https://github.com/cdata/noosphere/pull/298))
+- release main ([#279](https://github.com/cdata/noosphere/pull/279))
+- Improvements to C FFI documentation. ([#285](https://github.com/cdata/noosphere/pull/285))
+- clippy fix and CI lint fix ([#277](https://github.com/cdata/noosphere/pull/277))
+- release main ([#236](https://github.com/cdata/noosphere/pull/236))
+- release main ([#227](https://github.com/cdata/noosphere/pull/227))
+- release main ([#220](https://github.com/cdata/noosphere/pull/220))
+- release main ([#217](https://github.com/cdata/noosphere/pull/217))
+- release main ([#205](https://github.com/cdata/noosphere/pull/205))
+- release main ([#198](https://github.com/cdata/noosphere/pull/198))
+- release main ([#183](https://github.com/cdata/noosphere/pull/183))
+- release main ([#181](https://github.com/cdata/noosphere/pull/181))
+- Update IPLD-adjacent dependencies ([#180](https://github.com/cdata/noosphere/pull/180))
+- release main ([#157](https://github.com/cdata/noosphere/pull/157))
+- Use `tempfile` instead of `temp-dir` ([#171](https://github.com/cdata/noosphere/pull/171))
+- release main ([#137](https://github.com/cdata/noosphere/pull/137))
+- release main ([#125](https://github.com/cdata/noosphere/pull/125))
+- Add versions to workspace crate dependencies
+- Add descriptions to Cargo manifests
+- Add crate READMEs and Cargo.toml metadata ([#114](https://github.com/cdata/noosphere/pull/114))
+- rename `noosphere` to `noosphere-core` ([#112](https://github.com/cdata/noosphere/pull/112))
+- Use pre-release versioning for crates
+- Implement `orb save` and `orb status` subcommands ([#88](https://github.com/cdata/noosphere/pull/88))
+- Introduce `noosphere-cli` crate ([#71](https://github.com/cdata/noosphere/pull/71))
+- Sphere-to-HTML static site generation ([#51](https://github.com/cdata/noosphere/pull/51))
+
 ## [0.1.0](https://github.com/subconsciousnetwork/noosphere/compare/noosphere-into-v0.1.1-alpha.1...noosphere-into-v0.1.0) (2022-11-14)
 
 
